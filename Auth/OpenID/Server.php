@@ -1573,7 +1573,7 @@ class Auth_OpenID_Decoder {
 
         if (!is_a($handlerCls, 'Auth_OpenID_ServerError')) {
             return call_user_func_array(array($handlerCls, 'fromMessage'),
-                                        array($message, $this->server));
+                                        array(&$message, $this->server));
         } else {
             return $handlerCls;
         }
@@ -1699,7 +1699,7 @@ class Auth_OpenID_Server {
     {
         if (method_exists($this, "openid_" . $request->mode)) {
             $handler = array($this, "openid_" . $request->mode);
-            return call_user_func($handler, $request);
+            return call_user_func($handler, &$request);
         }
         return null;
     }
